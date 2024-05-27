@@ -9,12 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name ="myServlet", urlPatterns = "/my")
+@WebServlet(name = "myServlet", urlPatterns = "/my")
 public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-
+        System.out.println("실행?");
         resp.setContentType("text/html");
         PrintWriter out = resp.getWriter();
 
