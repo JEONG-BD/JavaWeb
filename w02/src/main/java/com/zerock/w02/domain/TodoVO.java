@@ -14,7 +14,7 @@ public class TodoVO {
 
     private Long tno;
 
-    private String titile;
+    private String title;
 
     private LocalDate dueDate;
 
