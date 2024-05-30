@@ -1,13 +1,14 @@
 package com.zerock.w02.domain;
 
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Setter
+@Builder
 @Getter
 @ToString
 public class TodoVO {
