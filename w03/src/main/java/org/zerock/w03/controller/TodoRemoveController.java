@@ -1,7 +1,7 @@
-package com.zerock.w02.controller;
+package org.zerock.w03.controller;
 
 
-import com.zerock.w02.service.TodoService;
+import org.zerock.w03.service.TodoService;
 import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
