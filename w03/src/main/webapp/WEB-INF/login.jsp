@@ -13,7 +13,7 @@
 <body>
   <form action="/login", method="post">
     <input type="text" name="mid">
-    <input type="text" name="pwd">
+    <input type="text" name="mpw">
     <button type = "submit">Login</button>
   </form>
 </body>
