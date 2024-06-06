@@ -2,9 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
 
-        <context:component-scan base-package="org.zerock.w04.sample"></context:component-scan>
+<context:component-scan base-package="org.zerock.w04.sample"></context:component-scan>
 
         <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
                 <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
@@ -24,6 +25,13 @@
               destroy-method="close">
                 <constructor-arg ref="hikariConfig" />
         </bean>
+
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+                <property name="dataSource" ref="dataSource" />
+        </bean>
+
+        <mybatis:scan base-package="org.zerock.w04.mapper"></mybatis:scan>
+
 
 
 </beans>
