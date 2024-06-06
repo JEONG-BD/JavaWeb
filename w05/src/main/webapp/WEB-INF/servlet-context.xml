@@ -14,4 +14,14 @@
     </bean>
 
     <context:component-scan base-package="org.zerock.w05.controller"></context:component-scan>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="org.zerock.w05.controller.formatter.LocalDateFormatter"/>
+            </set>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven  conversion-service="conversionService" />
+
 </beans>
