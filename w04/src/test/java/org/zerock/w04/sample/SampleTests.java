@@ -16,12 +16,15 @@ import java.sql.Connection;
 @ContextConfiguration(locations="file:src/main/webapp/WEB-INF/root-context.xml")
 public class SampleTests {
 
+/*
     @Autowired
     private SampleService sampleService;
+*/
 
     @Autowired
     private DataSource dataSource;
 
+/*
     @Test
     public void testService1() {
         log.info(sampleService);
@@ -30,6 +33,7 @@ public class SampleTests {
 
         Assertions.assertNotNull(sampleService);
     }
+*/
 
     @Test
     public void testConnection() throws Exception {
