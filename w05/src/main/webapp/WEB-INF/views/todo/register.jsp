@@ -70,7 +70,6 @@
                 </div>
               </div>
             </form>
-            <%--
             <script>
 
               const serverValidResult = {}
@@ -83,7 +82,7 @@
 
               console.log(serverValidResult)
 
-            </script>--%>
+            </script>
 
           </div>
 
