@@ -9,6 +9,7 @@ import org.zerock.w05.dto.TodoDTO;
 import org.zerock.w05.mapper.TodoMapper;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -30,6 +31,40 @@ public class TodoServiceImpl implements TodoService {
 
         todoMapper.insert(todoVO);
 
+    }
+
+    @Override
+    public List<TodoDTO> getAll() {
+        List<TodoDTO> dtoList = todoMapper.selectAll().stream()
+                .map(vo -> modelMapper.map(vo, TodoDTO.class))
+                .collect(Collectors.toList());
+
+        return dtoList;
+    }
+
+    @Override
+    public TodoDTO getOne(Long tno) {
+
+        TodoVO todoVO = todoMapper.selectOne(tno);
+
+        TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);
+
+        return todoDTO;
+    }
+
+    @Override
+    public void delete(Long tno) {
+
+        todoMapper.delete(tno);
+
+    }
+
+    @Override
+    public void update(TodoDTO todoDTO) {
+
+        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+
+        todoMapper.update(todoVO);
     }
 
 }

@@ -28,7 +28,7 @@ public class TodoMapperTests {
     @Test
     public void testInsert(){
         TodoVO todoVO = TodoVO.builder()
-                .title("Spring Test")
+                .title("Spring Test2")
                 .dueDate(LocalDate.of(2024,6,5))
                 .writer("user00")
                 .build();
@@ -44,4 +44,18 @@ public class TodoMapperTests {
         voList.forEach(vo -> log.info(vo));
 
     }
+
+    @Test
+    public void testSelectOne(){
+
+        TodoVO todoVO = todoMapper.selectOne(1L);
+
+        log.info(todoVO);
+    }
+
+    @Test
+    public void testDelete(){
+        todoMapper.delete(1L);
+    }
+
 }
