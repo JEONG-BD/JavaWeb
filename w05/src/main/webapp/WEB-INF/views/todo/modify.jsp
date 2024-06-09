@@ -48,9 +48,8 @@
           </div>
           <div class="card-body">
             <form action="/todo/modify" method="post">
-
-
-
+              <input type="hidden" name="page" value="${pageRequestDTO.page}">
+              <input type="hidden" name="size" value="${pageRequestDTO.size}">
               <div class="input-group mb-3">
                 <span class="input-group-text">TNO</span>
                 <input type="text" name="tno" class="form-control"
@@ -73,9 +72,7 @@
                 <span class="input-group-text">Writer</span>
                 <input type="text" name="writer" class="form-control"
                        value=<c:out value="${dto.writer}"></c:out> readonly>
-
               </div>
-
               <div class="form-check">
                 <label class="form-check-label" >
                   Finished &nbsp;

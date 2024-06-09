@@ -59,10 +59,13 @@
               </tr>
               </thead>
               <tbody>
-              <c:forEach items="${dtoList}" var="dto">
+              <c:forEach items="${responseDTO.dtoList}" var="dto">
                 <tr>
                   <th scope="row"><c:out value="${dto.tno}"/></th>
                   <td>
+                   <%-- <a href="/todo/read?tno=${dto.tno}" class="text-decoration-none">
+                      <c:out value="${dto.title}"></c:out>
+                    </a>--%>
                     <a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none" data-tno="${dto.tno}" >
                       <c:out value="${dto.title}"/>
                     </a>
@@ -73,12 +76,8 @@
                 </tr>
               </c:forEach>
 
-
               </tbody>
             </table>
-
-            </table>
-
             <div class="float-end">
               <ul class="pagination flex-wrap">
                 <c:if test="${responseDTO.prev}">
@@ -101,10 +100,10 @@
 
             </div>
 
-<%--
+
             <script>
 
-              /* document.querySelector(".pagination").addEventListener("click", function (e) {
+              document.querySelector(".pagination").addEventListener("click", function (e) {
                       e.preventDefault()
                       e.stopPropagation()
 
@@ -117,7 +116,7 @@
                       const num = target.getAttribute("data-num")
 
                       self.location = `/todo/list?page=\${num}` //백틱(` `)을 이용해서 템플릿 처리
-                  },false)*/
+                  },false)
 
               document.querySelector(".pagination").addEventListener("click", function (e) {
                 e.preventDefault()
@@ -138,8 +137,6 @@
 
               },false)
 
-
-
               document.querySelector(".clearBtn").addEventListener("click", function (e){
                 e.preventDefault()
                 e.stopPropagation()
@@ -147,17 +144,11 @@
                 self.location ='/todo/list'
 
               },false)
-
-
             </script>
---%>
-
           </div>
-
         </div>
       </div>
     </div>
-
   </div>
   <div class="row content">
   </div>
