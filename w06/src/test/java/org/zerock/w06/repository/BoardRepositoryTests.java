@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.w06.domain.Board;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -27,8 +28,36 @@ public class BoardRepositoryTests {
             Board result = boardRepository.save(board);
             log.info("BNO : " + result.getBno());
         });
-
-
     }
 
+    @Test
+    public void testSelect(){
+        Long bno = 100L;
+
+        Optional<Board> result = boardRepository.findById(bno);
+
+        Board board = result.orElseThrow();
+
+        log.info(board);
+    }
+
+    @Test
+    public void testUpdate(){
+        Long bno = 100L;
+
+        Optional<Board> result = boardRepository.findById(bno);
+
+        Board board = result.orElseThrow();
+
+        board.change("update..title 100", "update content 100");
+
+        boardRepository.save(board);
+    }
+
+    @Test
+    public void testDelete(){
+        Long bno = 99L;
+
+        boardRepository.deleteById(bno);
+    }
 }
