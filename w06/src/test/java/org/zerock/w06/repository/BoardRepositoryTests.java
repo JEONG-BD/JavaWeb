@@ -4,8 +4,13 @@ import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
 import org.zerock.w06.domain.Board;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -17,12 +22,12 @@ public class BoardRepositoryTests {
     private BoardRepository boardRepository;
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Board board = Board.builder()
-                    .title("title..." +i)
-                    .content("content..." +i)
-                    .writer("user" + i )
+                    .title("title..." + i)
+                    .content("content..." + i)
+                    .writer("user" + i)
                     .build();
 
             Board result = boardRepository.save(board);
@@ -31,7 +36,7 @@ public class BoardRepositoryTests {
     }
 
     @Test
-    public void testSelect(){
+    public void testSelect() {
         Long bno = 100L;
 
         Optional<Board> result = boardRepository.findById(bno);
@@ -42,7 +47,7 @@ public class BoardRepositoryTests {
     }
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         Long bno = 100L;
 
         Optional<Board> result = boardRepository.findById(bno);
@@ -55,9 +60,36 @@ public class BoardRepositoryTests {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         Long bno = 99L;
 
         boardRepository.deleteById(bno);
+    }
+
+    @Test
+    public void testPaging() {
+
+        PageRequest pageable = PageRequest.of(0, 10, Sort.by("bno").descending());
+
+        Page<Board> result = boardRepository.findAll(pageable);
+
+        log.info("total count :" + result.getTotalElements());
+        log.info("total page : " + result.getTotalPages());
+        log.info("page size : " + result.getSize());
+        log.info("page number : " + result.getNumber());
+
+        List<Board> todoList = result.getContent();
+
+        todoList.forEach(vo -> log.info(vo));
+    }
+
+
+    @Test
+    public void testSearch1() {
+
+        //2 page order by bno desc
+        Pageable pageable = PageRequest.of(1,10, Sort.by("bno").descending());
+
+        boardRepository.search1(pageable);
     }
 }
