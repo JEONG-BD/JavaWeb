@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.w06.dto.BoardDTO;
+import org.zerock.w06.dto.PageRequestDTO;
+import org.zerock.w06.dto.PageResponseDTO;
 
 @SpringBootTest
 @Log4j2
@@ -44,5 +46,19 @@ public class BoardServiceTests {
     @Test
     public void testRemove(){
         boardService.remove(1L);
+    }
+
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("tct")
+                .keyword("1")
+                .page(1)
+                .size(10)
+                .build();
+
+        PageResponseDTO responseDTO = boardService.list(pageRequestDTO);
+
+        log.info(responseDTO);
     }
 }
