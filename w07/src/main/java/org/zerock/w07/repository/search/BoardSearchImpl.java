@@ -8,10 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.zerock.w07.domain.Board;
 import org.zerock.w07.domain.QBoard;
-import org.zerock.w07.dto.BoardDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardSearch{
 
