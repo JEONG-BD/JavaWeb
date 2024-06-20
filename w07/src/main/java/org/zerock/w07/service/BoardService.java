@@ -1,6 +1,7 @@
 package org.zerock.w07.service;
 
 import org.zerock.w07.dto.BoardDTO;
+import org.zerock.w07.dto.BoardListReplyCountDTO;
 import org.zerock.w07.dto.PageRequestDTO;
 import org.zerock.w07.dto.PageResponseDTO;
 
@@ -15,5 +16,5 @@ public interface BoardService {
 
     PageResponseDTO<BoardDTO> list (PageRequestDTO pageRequestDTO);
 
-
+    PageResponseDTO<BoardListReplyCountDTO> listWithReplyCount(PageRequestDTO pageRequestDTO);
 }
