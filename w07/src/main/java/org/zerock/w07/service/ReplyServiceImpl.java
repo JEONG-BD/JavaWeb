@@ -27,14 +27,19 @@ public class ReplyServiceImpl implements ReplyService{
     private final ReplyRepository replyRepository ;
 
     private final ModelMapper modelMapper;
-
     @Override
     public Long register(ReplyDTO replyDTO) {
+
+        log.info("ServiceImpl");
+        log.info(replyDTO);
+        log.info("ServiceImpl");
         Reply reply = modelMapper.map(replyDTO, Reply.class);
+
         Long rno = replyRepository.save(reply).getRno();
 
         return rno;
     }
+
 
     @Override
     public ReplyDTO read(Long rno) {
