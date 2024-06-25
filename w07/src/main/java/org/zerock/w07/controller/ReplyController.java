@@ -8,10 +8,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.zerock.w07.dto.PageRequestDTO;
+import org.zerock.w07.dto.PageResponseDTO;
 import org.zerock.w07.dto.ReplyDTO;
 import org.zerock.w07.service.ReplyService;
 
@@ -49,5 +48,48 @@ public class ReplyController  {
 
     }
 
+    @Operation(summary = "Replies of board", description = "get reply")
+    @GetMapping(value = "/list/{bno}")
+    public PageResponseDTO<ReplyDTO> getList(@PathVariable("bno") Long bno,
+                                             PageRequestDTO pageRequestDTO){
+        PageResponseDTO<ReplyDTO> responseDTO = replyService.getListOfBoard(bno, pageRequestDTO);
 
+        return responseDTO;
+    }
+
+    @Operation(summary = "Read Reply", description = "Get 특정 댓글 조회")
+    @GetMapping(value="/{rno}")
+    public ReplyDTO getReplyDTO(@PathVariable("rno") Long rno){
+
+        ReplyDTO replyDTO = replyService.read(rno);
+
+        return replyDTO;
+    }
+
+    @Operation(summary = "Delete reply", description = "특정 댓글 삭제")
+    @DeleteMapping("/{rno}")
+    public Map<String, Long> remove(@PathVariable("rno") Long rno){
+        replyService.remove(rno);
+
+        Map<String, Long> resultMap = new HashMap<>();
+
+        resultMap.put("rno", rno);
+
+        return resultMap;
+    }
+
+    @Operation(summary = "Modify Reply", description = "특정 댓글 수정")
+    @PutMapping(value="/{rno}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Map<String, Long> remove(@PathVariable("rno") Long rno, @RequestBody ReplyDTO replyDTO){
+
+        replyDTO.setRno(rno);
+
+        replyService.modify(replyDTO);
+
+        Map<String, Long> resultMap = new HashMap<>();
+
+        resultMap.put("rno", rno);
+
+        return resultMap;
+    }
 }

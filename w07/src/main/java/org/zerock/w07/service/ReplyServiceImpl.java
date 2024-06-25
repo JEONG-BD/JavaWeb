@@ -82,6 +82,7 @@ public class ReplyServiceImpl implements ReplyService{
         return PageResponseDTO.<ReplyDTO>withAll()
                 .pageRequestDTO(pageRequestDTO)
                 .dtoList(dtoList)
+                .total((int)result.getTotalElements())
                 .build();
 
     }
